@@ -1,0 +1,23 @@
+<!doctype html>
+<title>H-V</title>
+{{ moment.include_moment() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="page">
+  <h1>My Message Board</h1>
+  <div class="metanav">
+  {% if not session.logged_in %}
+    <a href="{{ url_for('login') }}"><b>Login</b></a>
+    <a href="{{ url_for('signup') }}"><b>Signin</b></a>
+  {% else %}
+    <a href="{{ url_for('logout') }}"><b>Logout</b></a>
+  {% endif %}
+  </div>
+  <p>
+    <font color="#402392">Now: {{ moment(current_time).format('LLL') }}
+    </font>
+  </p>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>

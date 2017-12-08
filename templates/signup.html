@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>SignUp</h2>
+  {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+    <br>
+  <form action="{{ url_for('signup') }}" method="post">
+    <table>
+      <tr>
+        <td>Username:</td> 
+        <td><input type="text" name="username"></td>
+      <tr>
+        <td>Password:</td> 
+        <td><input type="password" name="password"></td> 
+      </tr>
+      <tr>
+        <td>Password Again:</td> 
+        <td><input type="password" name="confirm_password"></td> 
+      </tr>
+      <tr >
+        <td align='center' colspan="2"><input  type="submit" value="SignUp"></td> 
+      </tr>
+    </table>
+    
+  </form>
+{% endblock %}

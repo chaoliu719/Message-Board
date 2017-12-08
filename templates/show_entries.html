@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
+      <table>
+        <tr>
+          <td>Title:</td> 
+          <td><input type="text" size="30" name="title"></td>
+        <tr>
+          <td>Text:</td> 
+          <td><textarea name="text" rows="5" cols="40"></textarea></td> 
+        </tr>
+        <tr >
+          <td align='center' colspan="2"><input type="submit" value="Share"></td> 
+        </tr>
+      </table>
+    </form>
+  {% endif %}
+  <ul class="entries">
+  {% for entry in entries %}
+      <table width="100%">
+        <tr>
+          <td width="70%">
+            <h2>{{ entry.title }}</h2>
+          </td>
+          <td  align="right" >
+            <i><font color="#888888">-- By {{ entry.user }}</font><i>
+          </td>
+        </tr>
+        <tr>
+          <td style="word-wrap:break-word;word-break:break-all;" width="70%">
+            {{ entry.text|safe }} 
+          </td>
+          <td  align="right" ><font color="#666666">
+            {{ moment(conv(entry.rec.encode("ascii"), "%Y-%m-%d %H:%M:%S.%f")).fromNow(refresh=True) }}
+          </font>
+          </td>
+        </tr>
+      </table>
+  <hr width="90%" size='1' style="border:0.5px dashed rgb(220,220,220);">
+      
+    
+
+  {% else %}
+    <li><em>Empty</em></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
